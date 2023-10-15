@@ -2,11 +2,11 @@
     const tasks = [
         {
             content: "nagrać lekcję",
-            done: false,
+            done: true,
         },
         {
             content: "zjeść kolację",
-            done: true,
+            done: false,
         },
     ];
 
@@ -15,7 +15,9 @@
 
         for(const task of tasks) {
             htmlString += `
-                <li>
+                <li
+                ${task.done ? " style=\"text-decoration: line-through\"" : ""}
+                >
                     ${task.content};
                 </li>
             `;
@@ -26,6 +28,15 @@
     
     const init = () => {
         render();
+        
+        const form = document.querySelector(".js-form");
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const newTaskContent = document.querySelector(".js-newTask").value.trim();
+            console.log(newTaskContent);
+        })
     };
 
     init();
