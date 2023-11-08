@@ -1,43 +1,57 @@
 {
-    const tasks = [
-        {
-            content: "nagrać lekcję",
-            done: true,
-        },
-        {
-            content: "zjeść kolację",
-            done: false,
-        },
-    ];
+  const tasks = [
+    {
+      content: "nagrać lekcję",
+      done: false,
+    },
+    {
+      content: "zjeść kolację",
+      done: true,
+    },
+  ];
 
-    const render = () => {
-        let htmlString = "";
+  const render = () => {
+    let htmlString = "";
 
-        for(const task of tasks) {
-            htmlString += `
+    for (const task of tasks) {
+      htmlString += `
                 <li
-                ${task.done ? " style=\"text-decoration: line-through\"" : ""}
+                ${task.done ? ' style="text-decoration: line-through"' : ""}
                 >
                     ${task.content};
                 </li>
             `;
-        }
+    }
 
-        document.querySelector(".js-tasks").innerHTML = htmlString;
-    };
-    
-    const init = () => {
-        render();
-        
-        const form = document.querySelector(".js-form");
+    document.querySelector(".js-tasks").innerHTML = htmlString;
+  };
 
-        form.addEventListener("submit", (event) => {
-            event.preventDefault();
+  const addNewTask = (newTaskContent) => {
+    tasks.push({
+      content: newTaskContent,
+    });
 
-            const newTaskContent = document.querySelector(".js-newTask").value.trim();
-            console.log(newTaskContent);
-        })
-    };
+    render();
+  };
 
-    init();
+  const onFormSubmit = (event) => {
+    event.preventDefault();
+
+    const newTaskContent = document.querySelector(".js-newTask").value.trim();
+    if (newTaskContent === "") {
+      return;
+    }
+
+    addNewTask(newTaskContent);
+  };
+
+  const init = () => {
+    render();
+
+    const form = document.querySelector(".js-form");
+
+    form.addEventListener("submit", onFormSubmit);
+  };
+
+  init();
 }
