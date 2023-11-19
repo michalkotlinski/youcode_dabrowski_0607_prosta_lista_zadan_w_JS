@@ -18,6 +18,7 @@
                 <li
         ${task.done ? ' style="text-decoration: line-through"' : ""}
                 >
+            <button>usuń</button>
                     ${task.content};
                 </li>
             `;
