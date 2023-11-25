@@ -11,10 +11,9 @@
   ];
 
   const addNewTask = (newTaskContent) => {
-    const newTask = {
+    tasks.push ({
       content: newTaskContent,
-    };
-    tasks.push(newTask);
+    });
     render();
   }
 
